@@ -4,10 +4,9 @@ def base64saver(fileToSave, folder):
 
     id = uuid.uuid4()
 
-    print(fileToSave['name'])
-    path = './' + folder + '/' + str(id) + str(fileToSave['name'])
+    path = './' + folder + '/' + str(id) + '.png'
     with open(path, 'wb') as file:
-        file.write(base64.b64decode(fileToSave['content'].split(",")[1:2][0]))
+        file.write(base64.b64decode(fileToSave['content']))
 
-    print('the file ' +id+fileToSave['name'] + ' is saved')
-    return path
+    print('the file ' +str(id)+ '.png is saved')
+    return folder + '/' + str(id) + '.png'

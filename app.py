@@ -2,7 +2,7 @@
 from flask import Flask, Blueprint
 from flask_restplus import Api, Resource, fields
 from base64saver import base64saver
-from segmentation import to_lines, to_words, result, read_image
+from segmentation import to_lines, to_words, result, read_image, read_model
 
 import numpy as np
 import os
@@ -15,17 +15,19 @@ api = Api(blueprint, doc='/documentation') #,doc=False
 app.register_blueprint(blueprint)
 
 app.config['SWAGGER_UI_JSONEDITOR'] = True
+#app.config['SERVER_NAME'] = 'localhost:5000'
 
-a_doc = api.model('wordDetection', {'content' : fields.String('The content base64 encoded'), 'name' : fields.String('Name of the file')})
+a_doc = api.model('wordDetection', {'content' : fields.String('The content base64 encoded')})
  
+model = read_model()
 
 @api.route('/wordDetection')
 class Manager(Resource):
 
     @api.expect(a_doc)
     def post(self):
-        request = api.payload 
-        fileSave = base64saver(request, 'jd')
+        request = api.payload
+        fileSave = base64saver(request, 'images')
         if fileSave:
 
             image = read_image(fileSave)

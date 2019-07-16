@@ -1,12 +1,13 @@
 import cv2
 import numpy as np
 from Model import Model, DecoderType
+from preprocess import preprocess, Batch 
 
-
-model = Model(open('./model/charList.txt').read(), mustRestore=True)
+def read_model():
+    return Model(open('./model/charList.txt').read(), mustRestore=True)
 
 def read_image(path):
-    return cv2.imread('/home/src/' + path)
+    return cv2.imread('/home/' + path)
 
 def to_lines (image):
     linesList = []
