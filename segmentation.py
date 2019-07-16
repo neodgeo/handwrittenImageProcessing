@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 from Model import Model, DecoderType
-from preprocess import preprocess, Batch 
+from tool import preprocess, Batch 
 
 def read_model():
     return Model(open('./model/charList.txt').read(), mustRestore=True)
@@ -82,7 +82,6 @@ def result (fnImg, model):
 
 	batch = Batch(None, [img])
 	(recognized, probability) = model.inferBatch(batch, True)
-	print('Recognized:', '"' + recognized[0] + '"')
-	print('Probability:', probability[0])
+
 	return recognized[0], probability[0]
 
