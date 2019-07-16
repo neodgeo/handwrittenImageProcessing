@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 from Model import Model, DecoderType
-from tool import preprocess, Batch 
+from preprocess import preprocess, Batch 
 
 def read_model():
     return Model(open('./model/charList.txt').read(), mustRestore=True)
