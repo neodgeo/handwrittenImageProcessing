@@ -15,5 +15,6 @@ Then inside the docker
 ```bash
 cd home
 workon OpenCV-master-py3
+pip install -r requirements.txt
 Python app.py 
 ```
